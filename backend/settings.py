@@ -41,7 +41,7 @@ class _UiSettings(BaseSettings):
         env_ignore_empty=True
     )
 
-    title: str = "Parkhill"
+    title: str = "Parkhill | Revit Assistant"
     logo: Optional[str] = None
     chat_logo: Optional[str] = None
     chat_title: str = "Ask me anything"
