@@ -179,14 +179,14 @@ const Chat = () => {
     }
   }
 
-  const makeApiRequestWithoutCosmosDB = async (question: ChatMessage["content"], conversationId?: string) => {
+  const makeApiRequestWithoutCosmosDB = async (query: ChatMessage["content"], conversationId?: string) => {
     setIsLoading(true)
     setShowLoadingMessage(true)
     const abortController = new AbortController()
     abortFuncs.current.unshift(abortController)
 
-    const questionContent = typeof question === 'string' ? question : [{ type: "text", text: question[0].text }, { type: "image_url", image_url: { url: question[1].image_url.url } }]
-    question = typeof question !== 'string' && question[0]?.text?.length > 0 ? question[0].text : question
+    const questionContent = typeof query === 'string' ? query : [{ type: "text", text: query[0].text }, { type: "image_url", image_url: { url: query[1].image_url.url } }]
+    query = typeof query !== 'string' && query[0]?.text?.length > 0 ? query[0].text : query
 
     const userMessage: ChatMessage = {
       id: uuid(),
@@ -199,7 +199,7 @@ const Chat = () => {
     if (!conversationId) {
       conversation = {
         id: conversationId ?? uuid(),
-        title: question as string,
+        title: query as string,
         messages: [userMessage],
         date: new Date().toISOString()
       }

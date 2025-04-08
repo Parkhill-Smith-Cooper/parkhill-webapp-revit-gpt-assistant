@@ -41,11 +41,11 @@ class _UiSettings(BaseSettings):
         env_ignore_empty=True
     )
 
-    title: str = "Parkhill | Revit Assistant"
+    title: str = "Parkhill | Bentley AI Assistant"
     logo: Optional[str] = None
     chat_logo: Optional[str] = None
     chat_title: str = "Ask me anything"
-    chat_description: str = "I'm here to answer your Revit questions"
+    chat_description: str = "I'm here to answer your questions on our Bentley products"
     favicon: str = "/favicon.ico"
     show_share_button: bool = True
     show_chat_history_button: bool = True
