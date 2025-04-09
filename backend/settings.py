@@ -44,7 +44,7 @@ class _UiSettings(BaseSettings):
     title: str = "Parkhill | Bentley AI Assistant"
     logo: Optional[str] = None
     chat_logo: Optional[str] = None
-    chat_title: str = "Ask me anything"
+    chat_title: str = "Ask me anything..."
     chat_description: str = "I'm here to answer your questions on our Bentley products"
     favicon: str = "/favicon.ico"
     show_share_button: bool = True
