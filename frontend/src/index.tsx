@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import { initializeIcons } from '@fluentui/react'
+import { initializeIcons } from '@fluentui/react/lib/Icons'
 import '@fluentui/react/dist/css/fabric.css';
 
 import Chat from './pages/chat/Chat'
