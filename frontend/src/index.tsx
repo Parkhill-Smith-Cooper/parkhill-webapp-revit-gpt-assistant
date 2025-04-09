@@ -11,7 +11,7 @@ import { AppStateProvider } from './state/AppProvider'
 
 import './index.css'
 
-initializeIcons()
+initializeIcons('', { disableWarnings: true });
 
 export default function App() {
   return (
