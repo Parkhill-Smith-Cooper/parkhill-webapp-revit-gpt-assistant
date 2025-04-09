@@ -78,7 +78,7 @@ class _PromptflowSettings(BaseSettings):
     api_key: str
     response_timeout: float = 30.0
     request_field_name: str = "question"
-    response_field_name: str = "reply"
+    response_field_name: str = "answer"
     citations_field_name: str = "documents"
 
 
