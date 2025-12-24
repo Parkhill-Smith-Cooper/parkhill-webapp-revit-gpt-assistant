@@ -12,7 +12,7 @@ import { getMsalInstance } from './auth/msalInstance'
 
 import './index.css'
 
-initializeIcons("https://res.cdn.office.net/files/fabric-cdn-prod_20241209.001/assets/icons/")
+initializeIcons('https://res.cdn.office.net/files/fabric-cdn-prod_20241209.001/assets/icons/')
 
 export default function App() {
   return (
@@ -34,19 +34,27 @@ export default function App() {
 ;(async () => {
   const msalInstance = await getMsalInstance()
 
-  // Process the ?code=... response from AAD
+  // 1) Handle redirect response (when coming back from login)
   const result = await msalInstance.handleRedirectPromise().catch((err) => {
     console.error('MSAL redirect handling failed', err)
     return null
   })
 
-  // If we just handled a successful login redirect, send user to /#/chat
   if (result && result.account) {
-    // Make this account the active one
+    // Just logged in via redirect
     msalInstance.setActiveAccount(result.account)
-
-    // Force hash route to /chat
     window.location.hash = '#/chat'
+  } else {
+    // 2) No redirect just happened – check if user is already signed in
+    const accounts = msalInstance.getAllAccounts()
+    if (accounts.length > 0) {
+      msalInstance.setActiveAccount(accounts[0])
+
+      // If they hit the root (/#/), send them straight to chat
+      if (!window.location.hash || window.location.hash === '#/' || window.location.hash === '#') {
+        window.location.hash = '#/chat'
+      }
+    }
   }
 
   ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
