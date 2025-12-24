@@ -1,10 +1,22 @@
-import React, { useContext } from 'react'
-import { AppStateContext } from '../state/AppProvider'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { loginRequest } from '../auth/msalConfig'
 import { getMsalInstance } from '../auth/msalInstance'
 
 const Home: React.FC = () => {
-  const appStateContext = useContext(AppStateContext)
+  const navigate = useNavigate()
+
+  // If user is already logged in, skip Home and go straight to /chat
+  useEffect(() => {
+    ;(async () => {
+      const msalInstance = await getMsalInstance()
+      const accounts = msalInstance.getAllAccounts()
+      if (accounts.length > 0) {
+        msalInstance.setActiveAccount(accounts[0])
+        navigate('/chat', { replace: true })
+      }
+    })()
+  }, [navigate])
 
   const handleLogin = async () => {
     try {
@@ -25,7 +37,7 @@ const Home: React.FC = () => {
         justifyContent: 'center',
         background: '#f7fafc',
         padding: '1rem',
-        textAlign: 'center'
+        textAlign: 'center',
       }}
     >
       <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>
@@ -44,7 +56,7 @@ const Home: React.FC = () => {
           color: '#fff',
           border: 'none',
           borderRadius: '0.375rem',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
       >
         Login with Azure AD
