@@ -7,7 +7,6 @@ import Chat from './pages/chat/Chat'
 import Layout from './pages/layout/Layout'
 import NoPage from './pages/NoPage'
 import { AppStateProvider } from './state/AppProvider'
-import Home from './pages/Home'
 import { getMsalInstance } from './auth/msalInstance'
 
 import './index.css'
@@ -20,7 +19,7 @@ export default function App() {
       <HashRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route index element={<Chat />} />
             <Route path="chat" element={<Chat />} />
             <Route path="*" element={<NoPage />} />
           </Route>
@@ -43,17 +42,11 @@ export default function App() {
   if (result && result.account) {
     // Just logged in via redirect
     msalInstance.setActiveAccount(result.account)
-    window.location.hash = '#/chat'
   } else {
     // 2) No redirect just happened – check if user is already signed in
     const accounts = msalInstance.getAllAccounts()
     if (accounts.length > 0) {
       msalInstance.setActiveAccount(accounts[0])
-
-      // If they hit the root (/#/), send them straight to chat
-      if (!window.location.hash || window.location.hash === '#/' || window.location.hash === '#') {
-        window.location.hash = '#/chat'
-      }
     }
   }
 

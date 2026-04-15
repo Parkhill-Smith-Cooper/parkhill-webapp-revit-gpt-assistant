@@ -1,4 +1,3 @@
-//// filepath: d:\GitHub\parkhill-webapp-revit-gpt-assistant\frontend\src\auth\msalInstance.ts
 import { PublicClientApplication } from '@azure/msal-browser'
 import { msalConfig } from './msalConfig'
 
